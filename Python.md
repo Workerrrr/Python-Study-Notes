@@ -100,25 +100,16 @@ Python提供一个专门的函数 `type()`用于获取变量或字面量的数�
 ```python
 # 定义几个变量
 a = 1       # 变量 a 是 int 类型
-b = 2.0     # 变量 b 是 float 类型
+2.0     # 字面量 2.0 是 float 类型
 c = "Python" # 变量 C 是 string 类型
 # 获取并输出这几个变量的数据类型
 print(type(a))
-print(type(b))
+print(type(2.0))
 print(type(c))
 ```
 ![alt text](img/img-2.png)
 
 需要注意的是, 字符串类型(string) 的类型标识符为`str`, 而不是`string`
-
-也可以使用`type()`函数直接获取字面量的数据类型
-```python
-# 使用type()函数直接获取字面量的数据类型
-print(type(123))
-print(type(1.23))
-print(type("1 2 3"))
-```
-![alt text](img/img-2.png)
 
 使用`type()`函数获取静态类型变量的数据类型时, 结果是怎样的?
 ```python
