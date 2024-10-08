@@ -1,7 +1,7 @@
 # Python 学习笔记
 本笔记使用的Python版本为3.11
 
-`更新时间:2024-09-12`
+`更新时间:2024-10-08`
 
 - `<>`必填项，必须在当前位置填写相应数据
 - `{}`必选项，必须在当前位置选择一个给出的选项
@@ -432,13 +432,13 @@ print("字符串在python中的类型是: %s" % (type("字符串")))
 ```
 ![alt text](img/img-12.png)
 
-### 数据输入
+### 数据输入输出
 
 - input函数
 
 在python中, input函数的作用是获取键盘输入, 其使用方式很简单, 直接用一个变量储存所获取的键盘输入即可
 ```python
-# input函数的简单用法
+# input函数的基本用法
 a = input() # 小括号必不可少
 
 # 打印所获取的键盘输入
@@ -446,7 +446,100 @@ print("你输入的是:", a)
 ```
 ![img](img/img-13.png)
 
-*结尾的换行是来自于input函数还是print函数呢?*
+*为什么会有一个换行?*
 
+在编程中, 我们通常需要在用户使用键盘输入之前给予相应的提示信息, 以方便用户理解他所需要输入的是什么数据, 
+我们一般会使用专门的数据输出函数打印提示信息, 就像下面这样
+```python
+print("请输入你的名字:") # 使用print函数打印提示信息
+name = input()
 
+print(name)
+```
+![img](img/img-14.png)
 
+而在python中, input函数能直接使用字符串参数来打印提示信息
+```python
+name = input("请输入你的名字:")
+
+print(name)
+```
+![img](img/img-15.png)
+
+*两种方法在键盘输入时有什么区别?*
+
+- 不同类型数据的输入
+
+input函数的返回值类型为字符型`str`, 也就是说, 无论你输入的是数字、字母、汉字, 其存储到变量中的数据都是字符串
+```python
+# input函数的返回值类型
+a = input()
+b = input()
+c = input()
+
+# 打印变量的数据类型
+print("变量 a:", a,"数据类型:", type(a))
+print("变量 b:", b,"数据类型:", type(b))
+print("变量 c:", c,"数据类型:", type(c))
+```
+![img](img/img-16.png)
+
+想要输入其他类型的数据, 我们就需要使用之前学过的数据类型转换函数
+```python
+# 使用input函数获取键盘输入
+a = input()
+b = input()
+c = input()
+
+# 使用类型转换函数转换数据类型
+a = int(a) # 将 a 转换为整型
+b = float(b) # 将 b 转换为实型
+c = str(c) # 这么做没有意义
+
+# 打印变量的数据类型
+print("变量 a:", a, "数据类型:", type(a))
+print("变量 b:", b, "数据类型:", type(b))
+print("变量 c:", c, "数据类型:", type(c))
+```
+![img](img/img-17.png)
+
+- print函数
+
+与input函数的作用相反, print函数是将指定的数据输出到相应的位置, 其用法也很简单, 在括号内写上需要输出的数据即可
+```python
+# print函数的基本用法
+print("内容")
+```
+
+注意! print函数输出后会, 默认会在输出的末尾加上一个换行符`\n`, 如果想要取消自动换行, 则需要用到特定的参数
+
+- print函数的参数
+
+print函数拥有几个用于格式控制的参数
+
+`sep`参数用于指定多个值之间的间隔符, 默认为空格
+```python
+a = "Hello"
+b = "World"
+print(a, b, sep = '*')
+```
+![img](img/img-18.png)
+
+`end`参数用于指定字符串的结束符, 将其设置为空即可取消自动换行
+```python
+a = "Hello"
+b = "World"
+print(a, b, end = '!')
+```
+![img](img/img-19.png)
+```python
+# 取消print函数的自动换行
+a = "Hello"
+b = "World"
+
+print(a, end = "")
+print(b)
+```
+![img](img/img-20.png)
+
+*因为第二个print没有使用end参数, 所以其尾部自动换行*
