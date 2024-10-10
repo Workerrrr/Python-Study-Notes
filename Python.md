@@ -1,7 +1,7 @@
 # Python 学习笔记
 本笔记使用的Python版本为3.11
 
-`更新时间:2024-10-09`
+`更新时间:2024-10-10`
 
 - `<>`必填项，必须在当前位置填写相应数据
 - `{}`必选项，必须在当前位置选择一个给出的选项
@@ -574,13 +574,15 @@ b = False # 正确的语句
 实际上, python中的所有非空数据都被视为`True`, 例如非0数字、非空字符串、非空元组、非空集合等等;
 相反的, 所有类型的空值都视为`False`, 例如空字符串、0、None、空元组等等
 
-### if命令
+### 程序流程控制
+
+**if语句**
 
 python中提供了if语句进行判断
 
 if语句的基本格式
 ```python
-if <关系表达式> : # 冒号必不可少
+if <表达式> : # 冒号必不可少
     [语句]
 ```
 
@@ -593,3 +595,77 @@ if <关系表达式> :
 ```
 
 *帮助你养成良好的缩进习惯*
+
+**if...else语句**
+
+python中同样可以使用`if...else`语句创建多分支判断
+```python
+moneyiHave = 100
+moneyHeHave = 10000
+
+if moneyiHave > moneyHeHave:
+    print("小美喜欢我")
+else :
+    print("小美喜欢他")
+```
+
+*不需要打印输出, 你也应该知道答案*
+
+注意, 因为python使用缩进进行语句块判断, 所以在不同缩进的`if`之后不能使用`else`
+```python
+# 错误示例
+if 10 > 1:
+    print("message")
+    else : # 错误的缩进
+    print("message")
+```
+![img](img/img-21.png)
+
+**if...elif...else语句**
+
+python还提供了与c语言中switch语句功能类似但不完全相同的`if...elif...else`语句
+```python
+myLove = input("我喜欢的人是:")
+
+if myLove == "小美":
+    print(f"明天去跟{myLove}表白")
+elif myLove == "小红":
+    print(f"明天去跟{myLove}表白")
+elif myLove == "小兰":
+    print(f"明天去跟{myLove}表白")
+else : # else语句可以不写, 但必须写在语句块末尾
+    print(f"我不能跟{myLove}表白, 因为她不存在")
+```
+![img](img/img-22.png)
+
+在`if...elif...else语句`中, 任意一个条件满足后, 程序流程将直接跳出该if语句块, 并执行后面的语句
+```python
+num = 10
+
+if num < 10: # 条件不满足, 程序流程继续向下
+    print("10")
+elif num < 5: # 条件满足, 执行下面的语句, 并跳出该if语句块
+    print("5")
+else # 程序流程已经跳出, 此语句后面的语句将不会执行
+    print("1")
+print("end") # 程序流程跳出到该语句处, 并从此处开始继续向下逐句执行
+```
+
+如果你想用多个条件同时判断, 可以嵌套if语句, 或使用逻辑运算符
+```python
+# 简单的if语句嵌套, 判断游乐园儿童票
+age = input("请输入年龄:")
+height = input("请输入身高:")
+
+age = int(age)
+height = int(height)
+
+if age <= 12:
+    if height <= 140:
+        print("儿童票")
+    else :
+        print("成人票")
+```
+![img](img/img-23.png)
+
+*上面的程序能改写为if...elif...else语句吗?*
