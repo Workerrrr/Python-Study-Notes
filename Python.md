@@ -1689,5 +1689,5 @@ print(sorted(dict_1, reverse = True))   # 结果为['C', 'B', 'A']
 
 这是因为, python并非完全按照英文字母表的顺序来进行排序, 而是按照`ASCII码`对字符进行排序
 
-什么是`ASCII码`? ASCII[(1)](https://zh.wikipedia.org/wiki/ASCII "维基百科")[(2)](https://baike.baidu.com/item/ASCII/309296 "百度百科")是一种电脑字符编码系统
+什么是`ASCII码`? ASCII<sup>[(1)](https://zh.wikipedia.org/wiki/ASCII "维基百科")[(2)](https://baike.baidu.com/item/ASCII/309296 "百度百科")</sup>是一种电脑字符编码系统
 
