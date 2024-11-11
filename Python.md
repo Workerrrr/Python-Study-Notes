@@ -1689,5 +1689,80 @@ print(sorted(dict_1, reverse = True))   # 结果为['C', 'B', 'A']
 
 这是因为, python并非完全按照英文字母表的顺序来进行排序, 而是按照`ASCII码`对字符进行排序
 
-什么是`ASCII码`? ASCII<sup>[(1)](https://zh.wikipedia.org/wiki/ASCII "维基百科")[(2)](https://baike.baidu.com/item/ASCII/309296 "百度百科")</sup>是一种电脑字符编码系统
+什么是`ASCII码`? ASCII<sup>[(1)](https://zh.wikipedia.org/wiki/ASCII "维基百科")[(2)](https://baike.baidu.com/item/ASCII/309296 "百度百科")</sup>是一种电脑字符编码系统, 它以数字来标识字符, 比如字符`a`的ASCII码值为`97`, `A`则为`65`
+
+字符的比较与排序便是基于ASCII码值, 所以`a` > `A`, 因为`97` > `65`
+
+```python
+result = 'a' > 'A'
+print(result)   # 结果为True
+```
+
+字符串的比较则是从左到右逐位进行比较, 比如字符串`ABCX`和`ABEY`, 前两位相同, 则比较第三位`C` < `E`, 只要有一位能够确定大小, 则不再继续比较, 取该位比较的值作为表达式的值, 所以`ABCX` < `ABEY`
+
+```python
+result = "ABCX" > "ABEY"
+print(result)   # 结果为False
+```
+
+不同长度的字符串同理, 比如`abc`和`a`, 显然`abc`更大; 而对于`ABC`和`a`, 显然`a`更大
+
+```python
+result = "abc" > "a"
+print(result)   # 结果为True
+result = "ABC" > "a"
+print(result)   # 结果为False
+```
+
+如果字符串是中文或其他语言(例如日文、韩文), 那么还会按照ASCII码进行排序吗?
+
+```python
+result = "你好" > "再见"
+print(result)
+```
+
+结果是什么?
+
+当然不会, ASCII码只能表示128个字符, 对于中文来说是远远不够的
+
+python在设计之初便考虑到了这一点, 严格来说, python是按照Unicode<sup>[(1)](https://zh.wikipedia.org/wiki/Unicode "维基百科")[(2)](https://baike.baidu.com/item/%E7%BB%9F%E4%B8%80%E7%A0%81/2985798 "百度百科")</sup>编码对字符进行比较和排序, ASCII是Unicode字符集中的一个子集
+
+再回到上面的题目, `你好`转换为Unicode表示为`\u4f60\u597d`, 而`再见`转换为Unicode表示为`\u518d\u89c1`, 所以`你` < `再`, `你好` < `再见`
+
+```python
+result = "你好" > "再见"
+print(result)   # 结果为False
+```
+
+### 函数进阶
+
+#### 多返回值
+
+我们想要函数同时返回多个值, 该如何操作?
+
+如果同时写多个`return`语句, 显然是行不通的, 同时只能有一个`return`被执行
+
+```python
+def return_test():
+    return 1
+    return 2
+
+print(return_test())    #结果为1
+print(return_test())    #结果为1
+```
+
+在python中, return语句可以同时返回多个值
+
+```python
+# 同时返回多个值的return语句
+def return_test():
+    return 1, 'A', True
+
+x, y, z = return_test()
+# 使用多个变量同时接收多个返回值
+
+print(x)    # 结果为1
+print(y)    # 结果为'A'
+print(z)    # 结果为True
+```
 
