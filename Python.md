@@ -3,7 +3,7 @@ from setuptools.dist import sequence
 # Python 学习笔记
 本笔记使用的Python版本为3.11
 
-`更新时间:2024-11-08`
+`更新时间:2024-11-11`
 
 - `<>`必填项，必须在当前位置填写相应数据
 - `{}`必选项，必须在当前位置选择一个给出的选项
@@ -1616,4 +1616,78 @@ print(dict_1.keys())    # 结果是dict_keys(['Person'])
 程序采用问答的形式, 题目就是小美的基本信息, 如果答对5道题以上, 我就向小美表白, 否则说明我的准备还不够充分
 
 具体的程序代码在[practice/表白器.py](practice/表白器.py)
+
+#### 数据容器的通用操作
+
+python的各类数据容器尽管有所不同, 但部分操作是通用的
+
+- 在遍历上, 5类容器都支持`for`循环
+
+**统计**
+
+- `len()`函数: 统计数据容器长度(元素个数)
+- `max()`函数: 统计最大的元素
+- `min()`函数: 统计最小的元素
+
+```python
+# 数据容器的统计操作
+list_1 = [1, 2, 3]
+tuple_1 = ('a', 'b', 'c')
+str_1 = "Worker"
+dict_1 = {'A': 1, 'B': 2, 'C': 3}
+
+print(max(list_1))      # 结果为3
+print(max(tuple_1))     # 结果为c
+print(min(str_1))       # 结果为W
+print(min(dict_1))      # 结果为A
+```
+
+**类型转换**
+
+- `list()`函数: 将数据容器转换为列表
+- `tuple()`函数: 将数据容器转换为元组
+- `str()`函数: 将数据容器转换为字符串
+- `set()`函数: 将数据容器转换为集合
+- `dict()`函数: 将数据容器转换为字典
+
+```python
+# 数据容器的类型转换操作
+list_1 = [1, 2, 3]
+tuple_1 = ('a', 'b', 'c')
+str_1 = "Worker"
+dict_1 = {'A': 1, 'B': 2, 'C': 3}
+
+print(str(list_1))      # 结果为[1, 2, 3], 这是一个字符串, 方括号或者逗号也是一个元素
+print(list(tuple_1))    # 结果为['a', 'b', 'c']
+print(tuple(str_1))     # 结果为('W', 'o', 'r', 'k', 'e', 'r')
+print(set(dict_1))      # 结果为{'A', 'B', 'C'}
+# 字典直接转换为非字符串类型时, 值将会丢失
+```
+
+**排序**
+
+- `sorted()`函数: 将数据容器内的元素进行临时排序
+
+`sorted()`函数拥有一个参数`reverse`, 可以对其进行赋值操作, 其值为逻辑值. 如果`reverse`值为`True`, 则进行降序排序, 否则为升序, 其默认值为`False`
+
+```python
+# 数据容器的排序操作
+list_1 = [1, 2, 3]
+tuple_1 = ('a', 'b', 'c')
+str_1 = "Worker"
+dict_1 = {'A': 1, 'B': 2, 'C': 3}
+
+print(sorted(list_1))   # 结果为[1, 2, 3]
+print(sorted(tuple_1))  # 结果为['a', 'b', 'c']
+print(sorted(str_1, reverse = True))    # 结果为['r', 'r', 'o', 'k', 'e', 'W']
+print(sorted(dict_1, reverse = True))   # 结果为['C', 'B', 'A']
+```
+
+#### 字符串的排序和比较方式
+
+细心的朋友可能注意到了, 在上面`sorted()`函数的字符串排序, 其结果似乎与常识不同, 为何字母`r`排在字母`W`之前?
+
+这是因为, python并非完全按照英文字母表的顺序来进行排序, 而是按照`ASCII码`对字符进行排序
+
+什么是`ASCII码`? ASCII[(1)](https://zh.wikipedia.org/wiki/ASCII "维基百科")[(2)](https://baike.baidu.com/item/ASCII/309296 "百度百科")是一种电脑字符编码系统
 
