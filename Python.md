@@ -1931,3 +1931,131 @@ print((u'\uFFFD'.encode('utf-8')*2).decode('gbk'))
 
 **在本笔记中, 如无特殊标注, 均使用UTF-8编码格式**
 
+#### 打开文件
+
+在python中, 使用函数`open()`函数打开文件
+
+`open()`函数有三个参数, `name`, `mode`, `encoding` 
+
+`name`参数类型为`str`, 它表示文件的名字, 可以包含路径(绝对、相对), 默认路径为该python文件同文件夹
+
+*注意, Windows系统目录分隔符`\`会被识别为转义标识符, 需要在字符串前添加字母`r`*
+
+`mode`参数类型为`str`, 它表示文件打开的模式, 以下几个值
+
+- `r` 只读模式, 默认为此模式
+- `w` 写入模式, 会覆盖文件内容, 如果文件不存在, 则创建一个新的文件
+- `a` 追加模式, 写入的数据会追加到文件末尾, 如果文件不存在, 则创建一个新的文件
+- `r+` 读写模式, 文件指针在文件开头
+- `b` 二进制模式, 可以与其他模式进行组合使用, 例如`rb`, `wb`
+
+`encoding`参数类型为`str`, 它表示文件的编码格式, 一般使用`UTF-8`(不区分大小写), 只能通过关键字实参访问
+
+`open()`函数有返回值, 返回值类型为`object`
+
+```python
+# 使用open()函数打开文件
+f = open("python.txt", "r", encoding = "UTF-8")
+```
+
+#### 读取文件
+
+- `read()`按指定字节数读取文件, 不指定则默认读取文件全部内容, 返回一个字符串
+
+```text
+# python.txt
+Hello, World!
+```
+
+```python
+# read()方法的基本用法
+f = open("python.txt", "r", encoding = "UTF-8")
+# 打开文件
+
+content = f.read()
+print(content)  # 输出为Hello, World!
+```
+
+- `readlines()`读取文件全部内容, 返回一个列表
+
+```text
+# python.txt
+Hello!
+```
+
+```python
+# readlines()方法的基本用法
+f = open("python.txt", "r", encoding = "UTF-8")
+# 打开文件
+
+f_list = f.readlines()
+print(f_list)  # 输出为['Hello!']
+```
+
+此外, 还有`readline()`方法, 读取文件一行内容, 返回一个字符串
+
+注意, 使用文件读取方法后, python会记录文件指针位置, 下一次再使用读取方法时, 从记录的指针位置开始读取
+
+```text
+# python.txt
+Hello, World!
+```
+
+```python
+f = open("python.txt", "r", encoding = "UTF-8")
+# 打开文件
+
+content = f.read(5)
+print(content)  # 输出为Hello
+
+f_list = f.readlines()
+print(f_list)   # 输出为[', World!']
+```
+
+- for循环遍历文件对象
+
+for循环也可用于遍历文件对象, 每次读取一行
+
+```text
+# python.txt
+Hello, World!
+Workerrrr
+```
+
+```python
+f = open("python.txt", "r", encoding = "UTF-8")
+# 打开文件
+
+for line in f:
+    print(line)
+
+""" 输出为
+Hello, World!
+
+Workerrrr
+
+"""
+```
+
+#### 关闭文件
+
+- close()方法
+
+```python
+# 用close()方法直接关闭文件
+f = open("python.txt", "r", encoding = "UTF-8")
+# 打开文件
+
+f.close()   # 关闭文件
+```
+
+- 使用`with open() as f:`创建语句块, 在语句块结束时自动关闭文件
+
+```python
+with open("python.txt", "r", encoding = "UTF-8") as f:
+    for line in f:
+        print(line)
+# 语句块结束, 自动关闭文件
+print("Hello, World!")
+```
+
