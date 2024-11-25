@@ -1,11 +1,7 @@
-f = open("python.txt", "r", encoding = "UTF-8")
-# 打开文件
-
-for line in f:
-    print(line)
-""" 输出为
-Hello, World!
-
-Workerrrr
-
-"""
+with open(".\practice\essay.txt", "r", encoding = "UTF-8") as f:    # 打开文件
+    count : int = 0
+    for line in f:
+        for word in line.split():
+            if word == "to":
+                count += 1
+print(count)    # 输出为12

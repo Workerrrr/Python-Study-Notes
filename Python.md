@@ -1,7 +1,7 @@
 # Python 学习笔记
 本笔记使用的Python版本为3.11
 
-`更新时间:2024-11-18`
+`更新时间:2024-11-25`
 
 - `<>`必填项，必须在当前位置填写相应数据
 - `{}`必选项，必须在当前位置选择一个给出的选项
@@ -2057,5 +2057,83 @@ with open("python.txt", "r", encoding = "UTF-8") as f:
         print(line)
 # 语句块结束, 自动关闭文件
 print("Hello, World!")
+```
+
+#### 文件读取练习-统计单词数量
+
+编写程序, 统计下文中单词`to`的数量
+
+```text
+# essay.txt
+I've been writing for most of my life.
+The book Writing Without Teachers introduced me to one distinction and one practice that has helped my writing processes tremendously.
+The distinction is between the creative mind and the critical mind.
+While you need to employ both to get to a finished result, they cannot work in parallel no matter how much we might like to think so.
+Trying to criticize writing on the fly is possibly the single greatest barrier to writing that most of us encounter.
+If you are listening to that 5th grade English teacher correct your grammar while you are trying to capture a fleeting thought, the thought will die.
+If you capture the fleeting thought and simply share it with the world in raw form, no one is likely to understand.
+You must learn to create first and then criticize if you want to make writing the tool for thinking that it is.
+```
+
+我们很快就能想要, 使用`count()`方法能很快完成这个题目
+
+```python
+# 直接读取全文
+with open(".\practice\essay.txt", "r", encoding = "UTF-8") as f:    # 打开文件
+    print(f.read().count("to"))     # 输出为13
+```
+
+```python
+# 以每行为单位读取
+with open(".\practice\essay.txt", "r", encoding = "UTF-8") as f:    # 打开文件
+    count : int = 0
+    for line in f:
+        count += line.strip(' ').count("to")
+print(count)    # 输出为13
+```
+
+*但是, 答案正确吗?*
+
+显然不正确, `count()`是用于统计子串, 而非题目要求的**单词**, 对于单词`tomato`, 我们认为它不是单词`to`, 而`count()`方法则会统计到两个`to`
+
+所以, 我们需要稍微修改一下程序, 不使用`count()`方法, 而是使用关系运算符
+
+```python
+with open(".\practice\essay.txt", "r", encoding = "UTF-8") as f:    # 打开文件
+    count : int = 0
+    for line in f:
+        for word in line.split(' '):
+            if word == "to":
+                count += 1
+print(count)    # 输出为12
+```
+
+这次的答案是正确的. 这个程序其实还有些问题, 如果单词前后有标点符号, 将会被`split()`方法分割进用于储存单词的变量`word`中, 将无法统计, 但对于这个题目, 单词`to`的前后一般都不会存在标点符号, 所以需要具体问题具体分析
+
+#### 写入文件
+
+python提供了`write()`方法用于向文件写入数据, 但是`write()`方法并不直接作用于文件, 而是写入到缓冲区内, 使用方法`flush()`将缓冲区内容写入到硬盘中, `close()`方法同样有`flush()`方法的作用
+
+```python
+# 打开文件
+f = open("python.txt", "w", encoding = "UTF-8")
+
+# 写入数据
+f.write("Hello, World!")
+
+# 刷新缓冲区
+f.flush()
+
+# 关闭文件
+f.close()
+```
+
+#### 追加写入
+
+文件追加操作只需要将`open()`函数的第二个参数`mode`指定为`a`即可
+
+```python
+# 以追加方式文件
+f = open("python.txt", "a", encoding = "UTF-8")
 ```
 

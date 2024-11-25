@@ -8,6 +8,7 @@
 
 #### 字符串str.
 
+`count(value)`: 统计字符串中元素`value`的数量<br>
 `replace(ori, str)`: 将原字符串内的子串`ori`替换为`str`, 并返回整个字符串<br>
 `split(str)`: 分割以`str`为分隔的子串, 并返回一个列表<br>
 `title()`: 使字符串首字母大写<br>
